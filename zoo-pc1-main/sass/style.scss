@@ -1,0 +1,927 @@
+@use "./base/base";
+@use "./base/reset";
+@use "./global" as *;
+
+// ヘッダー
+.header {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  // max-width: 100%; /* header要素の幅が親要素を超えないように指定 */
+  // box-sizing: border-box;
+  top: 0;
+  left: 0;
+  height: 75px;
+  background-color: transparent;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  height: inherit;
+  padding-left: 22px;
+}
+
+.header__name {
+  margin-right: auto;
+}
+
+.header__logo {
+  @include mq("lg") {
+    width: 132px;
+  }
+}
+
+.header__nav {
+  height: inherit;
+}
+
+.header__items {
+  display: flex;
+  align-items: center;
+  height: inherit;
+}
+
+.header__item {
+  height: inherit;
+}
+
+.header__item:not(:first-child) {
+  margin-left: 60px;
+}
+
+.header__link {
+  font-size: 16px;
+  display: flex;
+  font-weight: $medium;
+  justify-content: center;
+  height: inherit;
+  align-items: center;
+  color: $black;
+}
+
+.header__link.header__link--contact {
+  padding: 27px 24px;
+  background-color: $brown;
+  color: $white;
+  transition: 0.3s background-color;
+}
+
+.header.change-color {
+  background-color: $white;
+  transition: 0.3s;
+}
+
+// ハンバーガー
+.hamburger {
+  position: fixed;
+  z-index: 9999;
+  top: 25px;
+  right: 15px;
+  width: 25px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.hamburger.is-active {
+  top: 25px;
+  right: 20px;
+}
+
+.hamburger span {
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  height: 2px;
+  transition: 0.3s transform, 0.3s background-color;
+  background-color: $brown2;
+}
+
+.hamburger span:nth-child(1) {
+  top: 0;
+}
+.hamburger span:nth-child(2) {
+  top: 8px;
+  transition: 0.3s opacity;
+}
+.hamburger span:nth-child(3) {
+  top: 16px;
+}
+
+.hamburger.is-active span {
+  background-color: $white;
+}
+
+.hamburger.is-active span:nth-child(1) {
+  top: 13px;
+  transform: rotate(-405deg);
+}
+.hamburger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-active span:nth-child(3) {
+  top: 13px;
+  transform: rotate(405deg);
+}
+
+// ドロワー
+.drawer-menu {
+  position: absolute;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba($color: $black2, $alpha: 0.4);
+}
+
+.drawer-menu__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: inherit;
+}
+
+.drawer-menu__items {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.drawer-menu__item {
+  display: inline-block;
+}
+
+.drawer-menu__item:not(:first-child) {
+  margin-top: 50px;
+}
+
+.drawer-menu__link {
+  display: inline-block;
+  font-weight: $medium;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  color: $white;
+  width: 200px;
+  text-align: center;
+  padding-bottom: 25px;
+}
+
+.drawer-menu__link.drawer-menu__link--contact {
+  display: block;
+  width: 200px;
+  margin: auto;
+  text-align: center;
+  padding: 14px 14px;
+  font-weight: $medium;
+  background-color: $brown;
+  border-radius: 6px;
+  color: $white;
+  transition: 0.5s;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+// メインビュー
+
+.mv {
+  width: 100%;
+  height: 100vh;
+}
+
+.mv__inner {
+  position: relative;
+  width: 100%;
+  height: inherit;
+}
+
+.mv__slider,
+.swiper-slide picture,
+.swiper-slide img {
+  height: inherit;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: inherit;
+  object-fit: cover;
+}
+
+.mv__title-wrap {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  padding-left: 120px;
+  @include mq("md") {
+    padding-left: 34px;
+  }
+}
+
+.mv__sub-title {
+  font-size: 38px;
+  font-weight: $medium;
+  line-height: 1.474;
+  letter-spacing: 0.05em;
+  color: $black;
+  @include mq("md") {
+    font-size: 28px;
+    line-height: 1.429;
+    letter-spacing: 0;
+  }
+}
+
+.mv__sub-text {
+  margin-top: 22px;
+  font-size: 15px;
+  font-weight: $medium;
+  letter-spacing: 0.05em;
+  color: $black;
+  @include mq("md") {
+    font-size: 14px;
+  }
+}
+
+// concept
+.concept {
+  padding: 140px 0;
+  @include mq("md") {
+    padding: 100px 0;
+  }
+}
+.concept__inner {
+  width: 100%;
+  margin: 0 120px;
+  @include mq("md") {
+    width: 100%;
+    margin-top: 100px;
+  }
+}
+
+.concept__title {
+  width: 100%;
+  text-align: center;
+  @include mq("md") {
+    text-align: left;
+  }
+}
+.concept__items {
+  margin-right: 0;
+  margin-top: 40px;
+  @include mq("md") {
+    margin-right: calc(50% - 50vw);
+  }
+}
+.concept__item {
+  margin-top: 40px;
+  width: 100%;
+  position: relative;
+}
+.concept__item::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: -15%;
+  right: -10%;
+  background-color: $beige;
+  width: 280px;
+  height: 720px;
+  border-radius: 4px;
+  @include mq("md") {
+    width: 50%;
+    top: -60%;
+    right: 0%;
+  }
+}
+.concept__text {
+  display: inline-block;
+  margin-top: 32px;
+}
+
+.concept__text--large {
+  margin-top: 32px;
+  font-size: 22px;
+  font-weight: $medium;
+  letter-spacing: 0.05em;
+  line-height: 1.727;
+  color: $black;
+  @include mq("md") {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.778;
+  }
+}
+
+.concept__text--s {
+  margin-top: 30px;
+  font-size: 13px;
+  font-weight: $regular;
+  letter-spacing: 0.05em;
+  line-height: 1.876;
+  color: $black;
+  @include mq("md") {
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.857;
+  }
+}
+
+// service
+
+.service {
+  overflow: hidden;
+  padding: 100px 0;
+  @include mq("md") {
+    padding: 100px 0 140px;
+  }
+}
+
+.service__cards {
+  display: grid;
+  margin-top: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  column-gap: 35px;
+  row-gap: 50px;
+  position: relative;
+
+  @include mq("md") {
+    margin-top: 40px;
+    padding: 0 13px;
+    row-gap: 30px;
+  }
+}
+
+.service__img {
+  aspect-ratio: 3 / 4;
+  border-top-left-radius: 20px;
+}
+.service__card {
+  position: relative;
+  width: 320px; // デフォルトの幅を指定
+  height: auto; // デフォルトの高さを指定
+  &:hover {
+    transition: transform 0.6s ease; /* ゆっくり変化させる */
+    transform: scale(1.08); // 拡大する
+    transform-origin: center; // 中央を基準にする
+  }
+}
+
+.service__cards::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  background-color: $beige;
+  width: 100vw;
+  height: 50%;
+  transform: translateX(-50%);
+  @include mq("md") {
+    top: -5%;
+    left: -5%;
+    width: 100%;
+    height: 1760px;
+  }
+}
+
+.service__body {
+  background-color: $white;
+  position: relative;
+  padding: 18px 0 46px;
+  box-shadow: 3px 3px 8px rgba($color: $black, $alpha: 0.16);
+}
+
+.service__text {
+  text-align: center;
+}
+
+.service__items {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.service__item {
+  font-size: 10px;
+  width: 53px;
+  padding: 3px 13px;
+  letter-spacing: 0.05em;
+  background-color: $brown2;
+  color: $white;
+}
+
+// access
+.access {
+  text-align: center;
+  padding-top: 140px;
+}
+
+.access__items {
+  margin-top: 41px;
+}
+.access__item:not(:first-child) {
+  margin-top: 17px;
+}
+
+.access-item {
+  display: flex;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $gray;
+  @include mq("md") {
+    flex-wrap: wrap;
+  }
+}
+.access-item__info {
+  width: 100px;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  @include mq("md") {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+}
+.access-item__name {
+  margin-left: 230px;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  @include mq("md") {
+    margin: 0;
+  }
+}
+
+.access-item__info,
+.access-info__name {
+  color: $black;
+}
+
+.access__title {
+  font-size: 36px;
+  font-weight: $medium;
+  letter-spacing: 0.05em;
+}
+.access__text {
+  font-size: 12px;
+  font-weight: $medium;
+  letter-spacing: 0.05em;
+  color: $brown;
+}
+
+.map iframe {
+  vertical-align: bottom;
+  margin-top: 100px;
+  width: 100%;
+  height: 420px;
+}
+
+// contact
+.contact {
+  padding-top: 40px;
+  width: 100%;
+  height: 463px;
+  background-image: url(/images/contact.img.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.contact__title {
+  color: $white;
+}
+
+.contact__body {
+  text-align: center;
+  margin-top: 80px;
+}
+.contact__copy {
+  font-weight: $regular;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  color: $white;
+}
+.btn.contact__btn--clear {
+  margin-top: 21px;
+  width: 340px;
+  height: 78px;
+  padding: 26px 29px;
+  border: 2px solid $white;
+  border-radius: 8px;
+  background-color: transparent;
+  position: relative;
+  transition: letter-spacing 0.3s ease-in-out;
+}
+
+.btn.contact__btn--clear:hover {
+  letter-spacing: 0.3em;
+}
+
+.btn.contact__btn--clear::before {
+  border-right: 3px solid #fff;
+  border-top: 3px solid #fff;
+  bottom: 0;
+  content: "";
+  height: 10px;
+  margin: auto;
+  position: absolute;
+  right: 40px;
+  top: 0;
+  transform: rotate(45deg);
+  width: 10px;
+}
+
+// page-top-button
+.page-top-btn {
+  position: fixed;
+  z-index: 9000;
+  right: 50px;
+  bottom: 120px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid $black;
+  border-radius: 50%;
+  @include mq("md") {
+    right: 25px;
+    bottom: 90px;
+  }
+}
+
+.page-top-btn::after {
+  position: absolute;
+  top: 39%;
+  left: 55%;
+  width: 10px;
+  height: 10px;
+  content: "";
+  transform: rotate(-45deg) translate(-50%, -50%);
+  border-top: 2px solid $black;
+  border-right: 2px solid $black;
+}
+.page-top-btn::before {
+  position: absolute;
+  top: 38%;
+  left: 59%;
+  width: 10px;
+  height: 10px;
+  content: "";
+  transform: rotate(-93deg) translate(-20%, -50%);
+  border-top: 2px solid #141414;
+}
+// footer
+.footer {
+  background-color: $black2;
+  width: 100%;
+  height: 79px;
+}
+.footer__copyright {
+  display: block;
+  padding-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+// contact-us
+.contact-us__inner {
+  position: relative;
+}
+.contact-us__title {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  padding-left: 120px;
+  @include mq("md") {
+    padding-left: 34px;
+  }
+}
+.section-title.section-title__main--form {
+  font-size: 38px;
+}
+.section-title.section-title__sub--form {
+  font-size: 14px;
+}
+
+// contact-page
+.contact-page {
+  padding: 60px 0 80px;
+  @include mq("md") {
+    padding: 70px 0 60px;
+  }
+}
+.contact-page__inner {
+  width: 100%;
+  max-width: 800px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  @include mq("md") {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+.contact-page__title {
+  // padding: 80px 0 60px;
+  text-align: center;
+}
+.contact-page__text {
+  display: inline-block;
+  text-align: left;
+  @include mq("md") {
+    font-size: 14px;
+    font-weight: $medium;
+    line-height: 1.875;
+  }
+}
+
+.form {
+  margin-top: 60px;
+  width: 100%;
+  height: 600px;
+  background-color: $beige;
+  border-radius: 20px 0 0 0;
+  @include mq("md") {
+    height: 627px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+.form__item {
+  @include mq("md") {
+    display: block;
+  }
+}
+
+.form__item:not(:first-child) {
+  margin-top: 20px;
+}
+
+.form__list {
+  padding: 30px 120px;
+  @include mq("md") {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+.form__label {
+  @include mq("md") {
+    text-align: left;
+  }
+}
+.form__labels {
+  display: flex;
+  justify-content: flex-start; // 左寄せ
+  align-items: center;
+  @include mq("md") {
+    width: 100%;
+    display: contents;
+  }
+}
+
+.form__label-text {
+  display: inline-block; // インラインブロック要素に設定
+  font-size: 14px;
+  font-weight: $medium;
+  width: 150px; // ラベルの幅を指定
+  @include mq("md") {
+    display: block; // ブロック要素に変更
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px; // 下に余白を設定
+    vertical-align: top;
+  }
+}
+
+.form__label:last-child.form__label-text {
+  vertical-align: top;
+}
+
+.form__input {
+  width: 100vw;
+  text-align: left;
+  @include mq("md") {
+    width: 100%;
+  }
+}
+
+.form__input-radio {
+  display: inline-block; /* form__input-radioを横並びにするためにinline-blockを指定 */
+  margin-right: 20px; /* form__input-radioの間にスペースを10px設定 */
+  margin-top: 20px;
+  vertical-align: middle; /* ラジオボタンを垂直方向に中央揃えするために指定 */
+  @include mq("md") {
+    width: 50%;
+    margin-top: 9px;
+  }
+}
+.form__input-radio-container {
+  margin-top: 21px;
+  @include mq("md") {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 30px;
+  margin-left: 13px;
+}
+
+label::before,
+label::after {
+  content: "";
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+}
+label::before {
+  background-color: $beige;
+  border: 1px solid $beige2;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  left: 20px;
+}
+
+label::after {
+  background-color: #ddd;
+  border-radius: 50%;
+  opacity: 0;
+  width: 6px;
+  height: 6px;
+  left: 22px;
+}
+
+input:checked + label::after {
+  opacity: 1;
+}
+
+.form__labels .form__input-label[for="inquiry-type"] {
+  display: contents; /* "お問い合わせの種類*" に付いているラジオボタンを非表示にする */
+}
+
+.form__input-label {
+  font-size: 14px;
+  font-weight: $regular;
+  display: inline-block; /* ラベルを横並びにするためにinline-blockを指定 */
+  vertical-align: middle; /* ラベルを垂直方向に中央揃えするために指定 */
+  @include mq("md") {
+    margin-top: 9px;
+  }
+}
+
+.form__input-group::after {
+  /* clearfixを追加 */
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.form__input-text {
+  display: inline-block; // インラインブロック要素に設定
+  vertical-align: middle; // 上下中央に配置
+  width: 360px;
+  height: 40px;
+  background-color: $white;
+  @include mq("md") {
+    width: 305px;
+  }
+}
+.form__labels-area {
+  display: flex;
+  align-items: flex-start;
+  @include mq("md") {
+    width: 100%;
+    display: block;
+  }
+}
+.form__label-textareas {
+  font-size: 14px;
+  @include mq("md") {
+    width: 100%;
+  }
+}
+.form__label-textarea {
+  width: 150px;
+  @include mq("md") {
+    width: auto;
+    margin-right: 10px;
+    vertical-align: top;
+  }
+}
+
+.textarea {
+  resize: none;
+  width: 360px;
+  height: 171px;
+  background-color: $white;
+  @include mq("md") {
+    width: 305px;
+  }
+}
+.form__btn {
+  text-align: center;
+  @include mq("md") {
+    margin: 0 auto;
+    bottom: 40px;
+  }
+}
+.btn-rounded {
+  width: 180px;
+  border-radius: 6px;
+}
+
+// 共通パーツ
+
+.inner {
+  width: 100%;
+  max-width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 25px;
+  padding-left: 25px;
+  @include mq("md") {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+.section-title__main {
+  font-size: 36px;
+  font-weight: $medium;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+}
+
+.section-title__sub {
+  margin-top: 7px;
+  font-size: 12px;
+  font-weight: $medium;
+  letter-spacing: 0.05em;
+  color: $brown;
+}
+.section-title.section-title--center {
+  text-align: center;
+  @include mq("md") {
+    text-align: right;
+  }
+}
+.text {
+  font-size: 15px;
+  font-weight: $regular;
+  line-height: 1.867;
+  line-height: 0.05em;
+  @include mq("md") {
+    font-size: 14px;
+  }
+}
+.text.text--large {
+  font-size: 22px;
+  font-weight: $medium;
+  line-height: 1.727;
+  letter-spacing: 0.05em;
+  @include mq("md") {
+    font-size: 18px;
+    line-height: 1.778;
+  }
+}
+
+.btn {
+  font-size: 16px;
+  width: 200px;
+  display: inline-block;
+  padding: 15px 15px;
+  background-color: $brown;
+  color: $white;
+  letter-spacing: 0.05em;
+}
+
+.md-none {
+  @include mq("md") {
+    display: none;
+  }
+}
+.md-show {
+  display: none;
+  @include mq("md") {
+    display: block;
+  }
+}
